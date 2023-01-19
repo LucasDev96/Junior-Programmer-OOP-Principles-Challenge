@@ -7,25 +7,40 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        TurnToMouseClick();
+        LeftClick(); // move pointer and shoot
     }
 
     // Turn the player towards the cursor on click
     void TurnToMouseClick()
     {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 direction = mousePosition - transform.position;
+        float angle = Vector2.SignedAngle(Vector2.up, direction);
+        transform.eulerAngles = new Vector3(0, 0, angle);
+
+    }
+
+    // Spawn a bullet after the player left clicks
+    void ShootBullet()
+    {
+        BulletSpawnPooling.instance.SetSpawnLocation(
+            BulletSpawnPooling.instance.SpawnObject());
+    }
+
+    // Activate other methods on left click
+    void LeftClick()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            Vector2 direction = mousePosition - transform.position;
-            float angle = Vector2.SignedAngle(Vector2.up, direction);
-            transform.eulerAngles = new Vector3(0, 0, angle);
+            TurnToMouseClick();
+            ShootBullet();
         }
     }
 }
