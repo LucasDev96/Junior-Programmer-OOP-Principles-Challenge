@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BaseEnemyBehavior : MonoBehaviour
@@ -21,17 +22,33 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     }
 
     // Move the enemy towards the player at a constant speed
-    void MoveToPlayer()
+    protected void MoveToPlayer()
     {
         transform.localPosition += transform.up * _speed * Time.deltaTime;
     }
 
     // Rotate the enemy to face the player
-    void RotateTowardsPlayer()
+    protected void RotateTowardsPlayer()
     {
         Vector2 direction = _playerRef.transform.position - transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, direction);
 
         transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        TakeDamage(collision);
+    }
+
+    // Take damage when hit by a bullet
+    // TODO: implement health and taking damage from bullet
+    protected void TakeDamage(Collider2D bullet)
+    {
+        if (bullet.CompareTag("Bullet"))
+        {
+            BulletSpawnPooling.instance.DespawnObject(bullet.gameObject);
+            Destroy(gameObject);
+        }
     }
 }
