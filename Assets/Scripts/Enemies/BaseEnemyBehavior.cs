@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class BaseEnemyBehavior : MonoBehaviour
 {
-    private GameObject _playerRef;
     [SerializeField] private float _speed;
     [field: SerializeField] public int enemyID { get; private set; }
     [SerializeField] private int _maxEnemyHealth;
@@ -15,9 +14,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerRef = GameObject.FindWithTag("Player");
         ResetHealth();
-        RotateTowardsPlayer();
     }
 
     // Update is called once per frame
@@ -33,9 +30,9 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     }
 
     // Rotate the enemy to face the player
-    protected void RotateTowardsPlayer()
+    public void RotateTowardsPlayer(GameObject player)
     {
-        Vector2 direction = _playerRef.transform.position - transform.position;
+        Vector2 direction = player.transform.position - transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, direction);
 
         transform.eulerAngles = new Vector3(0, 0, angle);

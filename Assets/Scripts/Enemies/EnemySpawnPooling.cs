@@ -7,6 +7,8 @@ public class EnemySpawnPooling : SpawnPooling
 {
     public static EnemySpawnPooling Instance { get; private set; }
 
+    private GameObject _playerRef;
+
     [Header("Spawn List")]
     [SerializeField] private GameObject[] _enemies;
     private List<GameObject>[] _enemyLists;
@@ -28,6 +30,7 @@ public class EnemySpawnPooling : SpawnPooling
     // Start is called before the first frame update
     void Start()
     {
+        _playerRef = GameObject.FindWithTag("Player");
         _enemyLists = new List<GameObject>[_enemies.Length];
 
         PopulateSpawnList(_enemies, _enemyLists);
@@ -65,7 +68,14 @@ public class EnemySpawnPooling : SpawnPooling
 
     public override void SetSpawnLocation(GameObject obj)
     {
+        if (!obj.CompareTag("Enemy"))
+        {
+            Debug.Log("Trying to change location of non enemy");
+            return;
+        }
+
         PickSideToSpawn(obj);
+        obj.GetComponent<NormalEnemy>().RotateTowardsPlayer(_playerRef);
     }
 
     void PickSideToSpawn(GameObject obj)
