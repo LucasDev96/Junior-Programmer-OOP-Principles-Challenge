@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class BaseEnemyBehavior : MonoBehaviour
 {
-    private GameObject _UIManager;
+    private static GameObject _UIManager;
+    [SerializeField] private int score;
     [SerializeField] private float _speed;
     [field: SerializeField] public int enemyID { get; private set; }
     [SerializeField] private int _maxEnemyHealth;
@@ -15,7 +16,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _UIManager = GameObject.FindGameObjectWithTag("GameUIManager");
+        SetUIManagerRef();
         ResetHealth();
     }
 
@@ -58,6 +59,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
             if (_health <= 0)
             {
                 DespawnSelf();
+                AddToScore();
                 ResetHealth(); // reset health back to max after despawn
             }
         }
@@ -73,11 +75,25 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
         }
     }
 
+    // Add to the player's score on "death"
+    protected void AddToScore()
+    {
+        _UIManager.GetComponent<GameUIManager>().SetScoreText(score);
+    }
+
     // Reset health back to max
     void ResetHealth() { _health = _maxEnemyHealth; }
 
     void DespawnSelf()
     {
         EnemySpawnPooling.Instance.DespawnObject(gameObject);
+    }
+
+    void SetUIManagerRef()
+    {
+        if (_UIManager == null)
+        {
+            _UIManager = GameObject.FindGameObjectWithTag("GameUIManager");
+        }
     }
 }
