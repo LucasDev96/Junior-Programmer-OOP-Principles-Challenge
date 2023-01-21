@@ -21,6 +21,22 @@ public abstract class SpawnPooling : MonoBehaviour
         }
     }
 
+    // Add _spawnCount amount of gameobjects to a given array of lists
+    protected virtual void PopulateSpawnList(GameObject obj, List<GameObject>[] lists)
+    {
+        for (int i = 0; i < lists.Length; i++)
+        {
+            lists[i] = new List<GameObject>();
+
+            for (int j = 0; j < _spawnCount; j++)
+            {
+                GameObject temp = Instantiate(obj);
+                temp.SetActive(false);
+                _spawnList.Add(temp);
+            }
+        }
+    }
+
     // Each child class should define their own spawn location
     public abstract void SetSpawnLocation(GameObject obj);
 
