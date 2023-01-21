@@ -8,12 +8,15 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     private GameObject _playerRef;
     [SerializeField] private float _speed;
     [field: SerializeField] public int enemyID { get; private set; }
+    [SerializeField] private int _maxEnemyHealth;
+    private int _health;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _playerRef = GameObject.FindWithTag("Player");
+        ResetHealth();
         RotateTowardsPlayer();
     }
 
@@ -43,14 +46,24 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
         TakeDamage(collision);
     }
 
-    // Take damage when hit by a bullet
-    // TODO: implement health and taking damage from bullet
+    // Take damage when hit by a bullet, and despawn object if health is 0
     protected void TakeDamage(Collider2D bullet)
     {
         if (bullet.CompareTag("Bullet"))
         {
             BulletSpawnPooling.Instance.DespawnObject(bullet.gameObject);
-            EnemySpawnPooling.Instance.DespawnObject(gameObject);
+
+            _health--;
+
+            if (_health <= 0)
+            {
+                EnemySpawnPooling.Instance.DespawnObject(gameObject);
+                ResetHealth(); // reset health back to max after despawn
+            }
+
         }
     }
+
+    // Reset health back to max
+    void ResetHealth() { _health = _maxEnemyHealth; }
 }

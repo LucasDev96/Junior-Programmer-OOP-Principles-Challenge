@@ -172,3 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  <enemyID>k__BackingField: 0
+  _maxEnemyHealth: 3
