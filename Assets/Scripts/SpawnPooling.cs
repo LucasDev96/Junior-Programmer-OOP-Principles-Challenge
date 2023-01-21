@@ -41,7 +41,7 @@ public abstract class SpawnPooling : MonoBehaviour
     public abstract void SetSpawnLocation(GameObject obj);
 
     // Set object to active and remove from _spawnList
-    public GameObject SpawnObject()
+    public virtual GameObject SpawnObject()
     {
         GameObject temp = _spawnList.First();
         temp.SetActive(true);

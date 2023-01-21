@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawnPooling : SpawnPooling
@@ -30,6 +31,36 @@ public class EnemySpawnPooling : SpawnPooling
         _enemyLists = new List<GameObject>[_enemies.Length];
 
         PopulateSpawnList(_enemies, _enemyLists);
+    }
+
+    // Get random enemy type, get enemy from array of enemy lists,
+    // set to active and then remove from list
+    public override GameObject SpawnObject()
+    {
+        int enemyType = Random.Range(0, _enemies.Length);
+        GameObject temp = _enemyLists[enemyType].First();
+        temp.SetActive(true);
+        _enemyLists[enemyType].Remove(temp);
+
+        return temp;
+    }
+
+    // Get type of enemy that needs to be despawn, deactivate it and
+    // add it back to the appropriate enemy list
+    public override void DespawnObject(GameObject obj)
+    {
+        if (!obj.CompareTag("Enemy"))
+        {
+            Debug.Log("Trying to despawn non enemy");
+            return;
+        }
+
+        obj.SetActive(false);
+
+        NormalEnemy enemy = obj.GetComponent<NormalEnemy>();
+        int enemyType = enemy.enemyID;
+
+        _enemyLists[enemyType].Add(obj);
     }
 
     public override void SetSpawnLocation(GameObject obj)
