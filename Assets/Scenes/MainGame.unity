@@ -286,6 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2784bdc31b6b4887355e043b145d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnCount: 10
+  _enemies:
+  - {fileID: 6845476478251548654, guid: bfd3c3d31b030644da97194d1b7ca8db, type: 3}
+  - {fileID: 459602838682180918, guid: 63296102bbdb18f458b9000cc32a5486, type: 3}
+  - {fileID: 2679231149654064804, guid: 05d541a7e4b238e429f4c7324fd011bb, type: 3}
 --- !u!4 &316577168
 Transform:
   m_ObjectHideFlags: 0

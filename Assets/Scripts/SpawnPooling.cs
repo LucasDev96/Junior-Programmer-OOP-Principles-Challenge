@@ -22,17 +22,17 @@ public abstract class SpawnPooling : MonoBehaviour
     }
 
     // Add _spawnCount amount of gameobjects to a given array of lists
-    protected virtual void PopulateSpawnList(GameObject obj, List<GameObject>[] lists)
+    protected virtual void PopulateSpawnList(GameObject[] objs, List<GameObject>[] lists)
     {
-        for (int i = 0; i < lists.Length; i++)
+        for (int i = 0; i < objs.Length; i++)
         {
             lists[i] = new List<GameObject>();
 
             for (int j = 0; j < _spawnCount; j++)
             {
-                GameObject temp = Instantiate(obj);
+                GameObject temp = Instantiate(objs[i]);
                 temp.SetActive(false);
-                _spawnList.Add(temp);
+                lists[i].Add(temp);
             }
         }
     }
