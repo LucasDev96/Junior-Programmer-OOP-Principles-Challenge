@@ -50,7 +50,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
         if (bullet.CompareTag("Bullet"))
         {
             BulletSpawnPooling.Instance.DespawnObject(bullet.gameObject);
-            Destroy(gameObject);
+            EnemySpawnPooling.Instance.DespawnObject(gameObject);
         }
     }
 }
