@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class BaseEnemyBehavior : MonoBehaviour
 {
+    private GameObject _UIManager;
     [SerializeField] private float _speed;
     [field: SerializeField] public int enemyID { get; private set; }
     [SerializeField] private int _maxEnemyHealth;
@@ -14,6 +15,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _UIManager = GameObject.FindGameObjectWithTag("GameUIManager");
         ResetHealth();
     }
 
@@ -41,6 +43,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TakeDamage(collision);
+        HurtPlayer(collision);
     }
 
     // Take damage when hit by a bullet, and despawn object if health is 0
@@ -54,13 +57,27 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
 
             if (_health <= 0)
             {
-                EnemySpawnPooling.Instance.DespawnObject(gameObject);
+                DespawnSelf();
                 ResetHealth(); // reset health back to max after despawn
             }
+        }
+    }
 
+    // Remove a life when coming in contact with the player, also despawning self
+    protected void HurtPlayer(Collider2D player)
+    {
+        if (player.CompareTag("Player"))
+        {
+            _UIManager.GetComponent<GameUIManager>().SetLivesText();
+            DespawnSelf();
         }
     }
 
     // Reset health back to max
     void ResetHealth() { _health = _maxEnemyHealth; }
+
+    void DespawnSelf()
+    {
+        EnemySpawnPooling.Instance.DespawnObject(gameObject);
+    }
 }
