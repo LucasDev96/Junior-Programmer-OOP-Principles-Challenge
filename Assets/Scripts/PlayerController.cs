@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     // Spawn a bullet after the player left clicks
     void ShootBullet()
     {
-        BulletSpawnPooling.instance.SetSpawnLocation(
-            BulletSpawnPooling.instance.SpawnObject());
+        BulletSpawnPooling.Instance.SetSpawnLocation(
+            BulletSpawnPooling.Instance.SpawnObject());
     }
 
     // Activate other methods on left click

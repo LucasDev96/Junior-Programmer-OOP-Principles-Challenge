@@ -30,7 +30,7 @@ public class PlayerBulletBehavior : MonoBehaviour
     // Despawn self and readd to the object pooling
     void DespawnSelf()
     {
-        BulletSpawnPooling.instance.DespawnObject(gameObject);
+        BulletSpawnPooling.Instance.DespawnObject(gameObject);
     }
 
     // Despawn the bullet if it goes out of bounds

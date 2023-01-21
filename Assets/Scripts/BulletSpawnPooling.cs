@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletSpawnPooling : SpawnPooling
 {
-    public static BulletSpawnPooling instance { get; private set; }
+    public static BulletSpawnPooling Instance { get; private set; }
     [SerializeField] private GameObject bulletPrefab;
 
     [SerializeField] private GameObject playerRef;
@@ -12,7 +12,7 @@ public class BulletSpawnPooling : SpawnPooling
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     // Start is called before the first frame update
