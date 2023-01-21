@@ -50,7 +50,7 @@ public abstract class SpawnPooling : MonoBehaviour
     }
 
     // Set object to inactive and put back into the _spawnList
-    public void DespawnObject(GameObject obj)
+    public virtual void DespawnObject(GameObject obj)
     {
         obj.SetActive(false);
         _spawnList.Add(obj);
