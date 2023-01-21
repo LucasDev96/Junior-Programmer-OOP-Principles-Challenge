@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawnPooling : SpawnPooling
 {
-    public EnemySpawnPooling Instance { get; private set; }
+    public static EnemySpawnPooling Instance { get; private set; }
 
     [Header("Spawn List")]
     [SerializeField] private GameObject[] _enemies;
