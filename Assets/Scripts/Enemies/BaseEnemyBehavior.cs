@@ -7,6 +7,8 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
 {
     private GameObject _playerRef;
     [SerializeField] private float _speed;
+    [field: SerializeField] public int enemyID { get; private set; }
+
 
     // Start is called before the first frame update
     void Start()
