@@ -11,6 +11,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     [field: SerializeField] public int enemyID { get; private set; }
     [SerializeField] private int _maxEnemyHealth;
     private int _health;
+    [SerializeField] private float _healthBarYOffset;
 
 
     // Start is called before the first frame update
