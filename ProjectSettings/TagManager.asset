@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet
   - GameUIManager
+  - Health Slider
   layers:
   - Default
   - TransparentFX
