@@ -16,12 +16,17 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     [SerializeField] private float _healthBarYOffset;
 
 
+    private void Awake()
+    {
+        GetHealthBar();
+        HideHealthBar();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         SetUIManagerRef();
         ResetHealth();
-        GetHealthBar();
     }
 
     // Update is called once per frame
@@ -90,6 +95,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
 
     void DespawnSelf()
     {
+        HideHealthBar();
         EnemySpawnPooling.Instance.DespawnObject(gameObject);
     }
 
@@ -106,5 +112,17 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     {
         healthBarRef = HealthBarManager.Instance
             .CreateHealthBar(gameObject, _healthBarYOffset, _maxEnemyHealth);
+    }
+
+    // Hide the health bar, for use when despawning the enemy
+    void HideHealthBar()
+    {
+        healthBarRef.GetComponent<HealthBarBehavior>().HideHealthBar();
+    }
+
+    // Show the health bar, public so it can be called from the spawn pooler
+    public void ShowHealthBar()
+    {
+        healthBarRef.GetComponent<HealthBarBehavior>().ShowHealthBar();
     }
 }

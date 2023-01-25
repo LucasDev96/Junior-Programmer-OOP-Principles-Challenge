@@ -42,7 +42,9 @@ public class EnemySpawnPooling : SpawnPooling
     {
         int enemyType = Random.Range(0, _enemies.Length);
         GameObject temp = _enemyLists[enemyType].First();
+
         temp.SetActive(true);
+
         _enemyLists[enemyType].Remove(temp);
 
         return temp;
@@ -75,6 +77,7 @@ public class EnemySpawnPooling : SpawnPooling
         }
 
         PickSideToSpawn(obj);
+        obj.GetComponent<NormalEnemy>().ShowHealthBar();
         obj.GetComponent<NormalEnemy>().RotateTowardsPlayer(_playerRef);
     }
 

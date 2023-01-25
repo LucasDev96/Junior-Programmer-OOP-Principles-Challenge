@@ -15,6 +15,7 @@ public class HealthBarBehavior : MonoBehaviour
     private float _yOffset;
 
     [SerializeField] private Image _healthSlider;
+    private Canvas _healthCanvas;
 
     private float _maxHealth;
     public float maxHealth
@@ -28,6 +29,11 @@ public class HealthBarBehavior : MonoBehaviour
     {
         get { return _currentHealth; }
         set { _currentHealth = SetCurrentHealth(value); }
+    }
+
+    void Awake()
+    {
+        SetHealthCanvas();
     }
 
     private void Update()
@@ -96,5 +102,23 @@ public class HealthBarBehavior : MonoBehaviour
     {
         Vector3 enemyPos = _enemyRef.transform.position;
         transform.position = new Vector3(enemyPos.x, enemyPos.y + _yOffset, enemyPos.z);
+    }
+
+    // Assign the canvas component of the healthbar to a variable
+    private void SetHealthCanvas()
+    {
+        _healthCanvas = gameObject.GetComponent<Canvas>();
+    }
+
+    // Disable the Canvas component to hide the healthbar when the enemy isn't in use
+    public void HideHealthBar()
+    {
+        _healthCanvas.enabled = false;
+    }
+
+    // Enable the Canvas component so it's visible when the enemy spawns
+    public void ShowHealthBar()
+    {
+        _healthCanvas.enabled = true;
     }
 }
