@@ -14,11 +14,13 @@ public class HealthBarManager : MonoBehaviour
 
     // Instantiate a healthbar, giving it an enemy reference, an offset, and an hp value
     // Returns itself so the enemy can get a ref to it
-    public void CreateHealthBar(GameObject target, float yOffset, int healthValue)
+    public GameObject CreateHealthBar(GameObject target, float yOffset, int healthValue)
     {
         GameObject temp = Instantiate(_healthBarPrefab);
         temp.GetComponent<HealthBarBehavior>().enemyRef = target; // assign enemy
         temp.GetComponent<HealthBarBehavior>().SetYOffset(yOffset); // assign y offset
         temp.GetComponent<HealthBarBehavior>().maxHealth = healthValue; // set max health
+
+        return temp;
     }
 }
