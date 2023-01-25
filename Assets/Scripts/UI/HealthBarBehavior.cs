@@ -83,7 +83,11 @@ public class HealthBarBehavior : MonoBehaviour
     // Set the y offset value for how far above the enemy the healthbar should be
     public void SetYOffset(float y)
     {
-        if (y > 0) _yOffset = y;
+        if (y > 0)
+        {
+            _yOffset = y;
+            return;
+        }
         Debug.Log("Y offset value is negative");
     }
 
