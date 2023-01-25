@@ -900,6 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 816494179}
   - component: {fileID: 816494178}
+  - component: {fileID: 816494180}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: GameUIManager
@@ -939,6 +940,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816494180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816494177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252cef216dc85e409516d62c5fdada3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBarPrefab: {fileID: 7307136299762556811, guid: 3ff554ab38754964ca5f43ffd5add71d, type: 3}
 --- !u!1 &1088798651
 GameObject:
   m_ObjectHideFlags: 0
