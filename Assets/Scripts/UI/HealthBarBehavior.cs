@@ -119,6 +119,7 @@ public class HealthBarBehavior : MonoBehaviour
     // Enable the Canvas component so it's visible when the enemy spawns
     public void ShowHealthBar()
     {
+        MoveWithTarget();
         _healthCanvas.enabled = true;
     }
 }

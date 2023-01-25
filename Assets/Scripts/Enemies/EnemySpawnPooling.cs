@@ -77,8 +77,8 @@ public class EnemySpawnPooling : SpawnPooling
         }
 
         PickSideToSpawn(obj);
-        obj.GetComponent<NormalEnemy>().ShowHealthBar();
         obj.GetComponent<NormalEnemy>().RotateTowardsPlayer(_playerRef);
+        obj.GetComponent<NormalEnemy>().ShowHealthBar();
     }
 
     void PickSideToSpawn(GameObject obj)
