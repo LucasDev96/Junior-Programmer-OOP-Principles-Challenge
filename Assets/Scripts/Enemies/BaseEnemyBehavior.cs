@@ -11,6 +11,8 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     [field: SerializeField] public int enemyID { get; private set; }
     [SerializeField] private int _maxEnemyHealth;
     private int _health;
+
+    public GameObject healthBarRef { get; private set; }
     [SerializeField] private float _healthBarYOffset;
 
 
@@ -19,6 +21,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     {
         SetUIManagerRef();
         ResetHealth();
+        GetHealthBar();
     }
 
     // Update is called once per frame
@@ -96,5 +99,12 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
         {
             _UIManager = GameObject.FindGameObjectWithTag("GameUIManager");
         }
+    }
+
+    // For use on Start(), when the enemy is created assign it a healthbar
+    void GetHealthBar()
+    {
+        healthBarRef = HealthBarManager.Instance
+            .CreateHealthBar(gameObject, _healthBarYOffset, _maxEnemyHealth);
     }
 }
