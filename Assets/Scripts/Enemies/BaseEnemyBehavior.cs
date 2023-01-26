@@ -83,6 +83,7 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
         {
             _UIManager.GetComponent<GameUIManager>().SetLivesText();
             DespawnSelf();
+            ResetHealth();
         }
     }
 
@@ -93,7 +94,11 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
     }
 
     // Reset health back to max
-    void ResetHealth() { _health = _maxEnemyHealth; }
+    void ResetHealth()
+    {
+        _health = _maxEnemyHealth;
+        healthBarRef.GetComponent<HealthBarBehavior>().SetFullHealth();
+    }
 
     void DespawnSelf()
     {
