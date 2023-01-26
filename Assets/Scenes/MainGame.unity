@@ -1163,6 +1163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1239344868}
   _livesText: {fileID: 1621733606}
+  _gameOverScreen: {fileID: 1104302463}
+  _gamePauseScreen: {fileID: 995819903}
   _startingLives: 3
   _scoreString: 'Score: '
   _livesString: 'Lives: '
