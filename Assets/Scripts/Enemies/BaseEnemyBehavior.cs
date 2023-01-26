@@ -64,6 +64,8 @@ public abstract class BaseEnemyBehavior : MonoBehaviour
             BulletSpawnPooling.Instance.DespawnObject(bullet.gameObject);
 
             _health--;
+            healthBarRef.GetComponent<HealthBarBehavior>().currentHealth = _health;
+            healthBarRef.GetComponent<HealthBarBehavior>().UpdateSlider();
 
             if (_health <= 0)
             {
