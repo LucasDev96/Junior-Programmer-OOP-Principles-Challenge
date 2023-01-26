@@ -73,7 +73,7 @@ public class HealthBarBehavior : MonoBehaviour
     private float SetCurrentHealth(float currentHealth)
     {
         if (currentHealth % 1 == 0 &&
-            currentHealth > 0 &&
+            currentHealth >= 0 &&
             currentHealth <= _maxHealth) return currentHealth;
 
         Debug.Log("Trying to set current health value to invald amount");
@@ -83,7 +83,7 @@ public class HealthBarBehavior : MonoBehaviour
     // Adjust the slider to match the current health
     public void UpdateSlider()
     {
-        _healthSlider.fillAmount = _maxHealth / _currentHealth;
+        _healthSlider.fillAmount = _currentHealth / _maxHealth;
     }
 
     // Set the y offset value for how far above the enemy the healthbar should be
