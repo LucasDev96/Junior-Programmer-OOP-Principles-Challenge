@@ -97,4 +97,13 @@ public class GameUIManager : MonoBehaviour
             UnpauseGame();
         }
     }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif !UNITY_EDITOR
+        Application.Quit();
+#endif
+    }
 }
