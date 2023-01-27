@@ -37,6 +37,7 @@ public class GameUIManager : MonoBehaviour
     private void Update()
     {
         TogglePause();
+        GameOver();
     }
 
     // Set the score text, adding how many points have been gained
@@ -56,6 +57,7 @@ public class GameUIManager : MonoBehaviour
     // Set a few variables on game start to ensure proper values
     private void SetStartingVariables()
     {
+        Time.timeScale = 1;
         _currentLives = _startingLives;
         isGameActive = true;
         isGamePaused = false;
@@ -88,7 +90,7 @@ public class GameUIManager : MonoBehaviour
     // Toggle pause when the escape key is pressed
     private void TogglePause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isGamePaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isGamePaused && isGameActive)
         {
             PauseGame();
         }
@@ -98,6 +100,19 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
+    // Triggers the game to stop when a game over occurs
+    public void GameOver()
+    {
+        if (_currentLives <= 0)
+        {
+            Time.timeScale = 0;
+            _gameOverScreen.SetActive(true);
+            isGameActive = false;
+        }
+    }
+
+
+    // Exit the application, stops play mode if in the unity editor
     public void ExitGame()
     {
 #if UNITY_EDITOR
