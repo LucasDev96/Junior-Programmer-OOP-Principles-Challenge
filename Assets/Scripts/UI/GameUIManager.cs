@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -109,6 +110,12 @@ public class GameUIManager : MonoBehaviour
             _gameOverScreen.SetActive(true);
             isGameActive = false;
         }
+    }
+
+    // Reload the sceen once the restart button is pressed
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
