@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameUIManager.Instance.isGameActive | GameUIManager.Instance.isGamePaused) return; // stop update if game is paused or over
         LeftClick(); // move pointer and shoot
     }
 
