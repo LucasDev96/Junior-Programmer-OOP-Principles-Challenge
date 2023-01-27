@@ -18,8 +18,14 @@ public class GameUIManager : MonoBehaviour
 
     private int _currentLives;
     private int _score = 0;
-    private bool isGameActive;
-    private bool isGamePaused;
+    public bool isGameActive { get; private set; }
+    public bool isGamePaused { get; private set; }
+    public static GameUIManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
