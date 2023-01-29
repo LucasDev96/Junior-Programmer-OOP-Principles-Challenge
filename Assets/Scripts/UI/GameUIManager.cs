@@ -111,6 +111,6 @@ public class GameUIManager : UIManager
     // Reload the sceen once the restart button is pressed
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MAINGAME);
     }
 }

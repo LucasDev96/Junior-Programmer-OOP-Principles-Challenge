@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class UIManager : MonoBehaviour
 {
+    [SerializeField] protected const int MAINMENU = 0;
+    [SerializeField] protected const int MAINGAME = 1;
+
     // Start is called before the first frame update
     void Start()
     {
