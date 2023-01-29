@@ -108,6 +108,12 @@ public class GameUIManager : UIManager
         }
     }
 
+    // Sends the player back to the main menu screen
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(MAINMENU);
+    }
+
     // Reload the sceen once the restart button is pressed
     public void RestartGame()
     {
