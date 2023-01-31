@@ -22,6 +22,7 @@ public class GameUIManager : UIManager
     public bool isGameActive { get; private set; }
     public bool isGamePaused { get; private set; }
     public static GameUIManager Instance { get; private set; }
+    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class GameUIManager : UIManager
     {
         SetStartingVariables();
         SetScoreText(_score);
+        SetAudioSource();
     }
 
     private void Update()
@@ -100,11 +102,12 @@ public class GameUIManager : UIManager
     // Triggers the game to stop when a game over occurs
     public void GameOver()
     {
-        if (_currentLives <= 0)
+        if (_currentLives <= 0 && isGameActive)
         {
             Time.timeScale = 0;
             _gameOverScreen.SetActive(true);
             isGameActive = false;
+            PlayGameOverSound();
         }
     }
 
@@ -119,4 +122,9 @@ public class GameUIManager : UIManager
     {
         SceneManager.LoadScene(MAINGAME);
     }
+
+    void SetAudioSource() { _audioSource = gameObject.GetComponent<AudioSource>(); }
+
+    // Play game over sound effect
+    void PlayGameOverSound() { _audioSource.Play(); }
 }

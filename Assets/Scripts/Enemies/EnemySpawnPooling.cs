@@ -21,6 +21,10 @@ public class EnemySpawnPooling : SpawnPooling
     [SerializeField] private float leftXPosition;
     [SerializeField] private float rightXPosition;
 
+    [Header("Enemy Death Sounds")]
+    [SerializeField] private AudioClip[] _deathSounds;
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         Instance = this;
@@ -34,6 +38,7 @@ public class EnemySpawnPooling : SpawnPooling
         _enemyLists = new List<GameObject>[_enemies.Length];
 
         PopulateSpawnList(_enemies, _enemyLists);
+        GetAudioSource();
     }
 
     // Get random enemy type, get enemy from array of enemy lists,
@@ -66,6 +71,7 @@ public class EnemySpawnPooling : SpawnPooling
         int enemyType = enemy.enemyID;
 
         _enemyLists[enemyType].Add(obj);
+        PlayDeathSound();
     }
 
     public override void SetSpawnLocation(GameObject obj)
@@ -135,5 +141,18 @@ public class EnemySpawnPooling : SpawnPooling
         float yPos = bottomYPosition;
 
         obj.transform.position = new Vector3(xPos, yPos, 0);
+    }
+
+    // Get the array of sound effects from the enemy's components
+    void GetAudioSource()
+    {
+        _audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
+    // Play a random sound on death
+    void PlayDeathSound()
+    {
+        int random = Random.Range(0, _deathSounds.Length);
+        _audioSource.PlayOneShot(_deathSounds[random]);
     }
 }

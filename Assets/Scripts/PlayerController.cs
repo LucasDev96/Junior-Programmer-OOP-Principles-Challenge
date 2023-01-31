@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         BulletSpawnPooling.Instance.SetSpawnLocation(
             BulletSpawnPooling.Instance.SpawnObject());
+
+        BulletSpawnPooling.Instance.PlayShootingSound();
     }
 
     // Activate other methods on left click
